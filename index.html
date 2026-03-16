@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GildedReads – Books of the Gilded Age</title>
+  <title>GildedReads</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -29,7 +29,6 @@
       min-height: 100vh;
     }
 
-    /* ---- HEADER ---- */
     header {
       background: var(--green);
       padding: 0 2rem;
@@ -57,31 +56,6 @@
       font-weight: 400;
     }
 
-    .header-tag {
-      font-size: 0.72rem;
-      color: var(--gold-light);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.8;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 0.85rem;
-      opacity: 0.75;
-      transition: opacity 0.2s;
-    }
-
-    .nav-links a:hover { opacity: 1; color: var(--gold-light); }
-
-    /* ---- HERO ---- */
     .hero {
       background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 60%, var(--gold-dark) 100%);
       padding: 4rem 2rem 3rem;
@@ -105,10 +79,7 @@
       position: relative;
     }
 
-    .hero h1 em {
-      color: var(--gold);
-      font-style: italic;
-    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
 
     .hero p {
       margin-top: 0.75rem;
@@ -119,59 +90,6 @@
       position: relative;
     }
 
-    .period-badge {
-      display: inline-block;
-      margin-top: 1.25rem;
-      background: var(--gold);
-      color: var(--brown);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 0.35rem 1rem;
-      border-radius: 99px;
-      position: relative;
-    }
-
-    /* ---- FILTERS ---- */
-    .filters {
-      display: flex;
-      gap: 0.6rem;
-      padding: 1.25rem 2rem;
-      flex-wrap: wrap;
-      align-items: center;
-      background: var(--parchment);
-      border-bottom: 1px solid rgba(201,168,76,0.25);
-    }
-
-    .filter-label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--brown-mid);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-right: 0.25rem;
-    }
-
-    .filter-btn {
-      padding: 0.35rem 0.9rem;
-      border-radius: 99px;
-      border: 1.5px solid var(--gold);
-      background: transparent;
-      color: var(--brown-mid);
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--gold);
-      color: var(--brown);
-      font-weight: 500;
-    }
-
-    /* ---- BOOKS GRID ---- */
     .books-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -181,7 +99,6 @@
       margin: 0 auto;
     }
 
-    /* ---- BOOK CARD ---- */
     .book-card {
       background: white;
       border-radius: 12px;
@@ -198,13 +115,30 @@
       box-shadow: 0 8px 32px var(--shadow);
     }
 
+    /*
+      HOW TO ADD YOUR OWN IMAGES:
+      In the books array below, find the book you want to update.
+      Replace the URL in the "image" field with a direct link to your image.
+      Example: image: "https://yoursite.com/your-image.jpg"
+      The image will fill the cover area and the title sits on top of it.
+    */
     .book-cover {
-      height: 140px;
+      height: 160px;
       display: flex;
       align-items: flex-end;
       padding: 1.25rem;
       position: relative;
       overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .book-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+      z-index: 1;
     }
 
     .book-cover-title {
@@ -215,24 +149,16 @@
       line-height: 1.25;
       position: relative;
       z-index: 2;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
-    }
-
-    .book-cover::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%);
-      z-index: 1;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
     }
 
     .genre-tag {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      background: rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.35);
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.35);
+      border: 1px solid rgba(255,255,255,0.25);
       color: white;
       font-size: 0.68rem;
       letter-spacing: 1.5px;
@@ -272,14 +198,10 @@
     .stars {
       display: flex;
       gap: 2px;
+      align-items: center;
     }
 
-    .star {
-      font-size: 1rem;
-      color: #ddd;
-      transition: color 0.1s;
-    }
-
+    .star { font-size: 1rem; color: #ddd; }
     .star.filled { color: var(--gold); }
     .star.half { color: var(--gold); opacity: 0.55; }
 
@@ -308,7 +230,6 @@
       border: 1px solid rgba(45,74,62,0.2);
     }
 
-    /* ---- REVIEWS SECTION ---- */
     .reviews-toggle {
       background: none;
       border: none;
@@ -347,7 +268,6 @@
       background: var(--parchment);
       border-radius: 8px;
       padding: 0.85rem 1rem;
-      position: relative;
     }
 
     .review-header {
@@ -379,7 +299,6 @@
       color: #5c3a1e;
     }
 
-    /* ---- AUTHOR BIO ---- */
     .author-bio-toggle {
       background: none;
       border: none;
@@ -421,7 +340,6 @@
       flex-wrap: wrap;
     }
 
-    /* ---- STATS BAR ---- */
     .stats-bar {
       background: var(--green);
       color: var(--cream);
@@ -450,7 +368,6 @@
       margin-top: 0.15rem;
     }
 
-    /* ---- FOOTER ---- */
     footer {
       background: var(--brown);
       color: rgba(250,246,238,0.5);
@@ -463,66 +380,6 @@
 
     footer strong { color: var(--gold); font-style: normal; }
 
-    /* ---- SOURCES SECTION ---- */
-    .sources-section {
-      max-width: 1200px;
-      margin: 0 auto 2rem;
-      padding: 0 2rem;
-    }
-
-    .sources-toggle {
-      background: none;
-      border: 1.5px solid var(--gold);
-      border-radius: 8px;
-      width: 100%;
-      padding: 0.85rem 1.25rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.88rem;
-      color: var(--brown-mid);
-      cursor: pointer;
-      text-align: left;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-
-    .sources-toggle:hover { background: rgba(201,168,76,0.08); }
-
-    .sources-panel {
-      display: none;
-      margin-top: 0.5rem;
-      background: white;
-      border-radius: 8px;
-      padding: 1.5rem;
-      border: 1px solid rgba(201,168,76,0.2);
-    }
-
-    .sources-panel.open { display: block; }
-
-    .sources-panel ol {
-      padding-left: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .sources-panel li {
-      font-family: 'Lora', serif;
-      font-size: 0.82rem;
-      line-height: 1.6;
-      color: var(--brown-mid);
-    }
-
-    .sources-panel li a {
-      color: var(--green);
-      text-decoration: none;
-    }
-
-    .sources-panel li a:hover { text-decoration: underline; }
-
-    /* ---- MODAL ---- */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -545,6 +402,7 @@
       overflow-y: auto;
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
       animation: modalIn 0.3s ease;
+      position: relative;
     }
 
     @keyframes modalIn {
@@ -553,18 +411,20 @@
     }
 
     .modal-cover {
-      height: 160px;
+      height: 180px;
       display: flex;
       align-items: flex-end;
       padding: 1.5rem;
       position: relative;
+      background-size: cover;
+      background-position: center;
     }
 
     .modal-cover::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
     }
 
     .modal-cover-title {
@@ -574,7 +434,7 @@
       color: white;
       position: relative;
       z-index: 2;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
     }
 
     .modal-body {
@@ -641,55 +501,30 @@
 
     @media (max-width: 600px) {
       .books-grid { grid-template-columns: 1fr; padding: 1.5rem 1rem; }
-      .filters { padding: 1rem; }
       .stats-bar { gap: 1.25rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
-  <div>
-    <div class="logo">Gilded<span>Reads</span></div>
-  </div>
-  <div class="header-tag">APUSH Period 6 &bull; 1865–1898</div>
-  <ul class="nav-links">
-    <li><a href="#">Browse</a></li>
-    <li><a href="#">Sources</a></li>
-  </ul>
+  <div class="logo">Gilded<span>Reads</span></div>
 </header>
 
-<!-- HERO -->
 <div class="hero">
   <h1>Books That Shaped <em>Gilded America</em></h1>
   <p>Historical reviews from the people who lived through it</p>
-  <span class="period-badge">APUSH Period 6 &bull; 1865–1898</span>
 </div>
 
-<!-- FILTERS -->
-<div class="filters">
-  <span class="filter-label">Filter by genre:</span>
-  <button class="filter-btn active" onclick="filterBooks('all', this)">All Books</button>
-  <button class="filter-btn" onclick="filterBooks('Muckraking', this)">Muckraking</button>
-  <button class="filter-btn" onclick="filterBooks('Political Economy', this)">Political Economy</button>
-  <button class="filter-btn" onclick="filterBooks('Social Reform', this)">Social Reform</button>
-  <button class="filter-btn" onclick="filterBooks('Utopian Fiction', this)">Utopian Fiction</button>
-  <button class="filter-btn" onclick="filterBooks('Frontier History', this)">Frontier History</button>
-  <button class="filter-btn" onclick="filterBooks('Political Satire', this)">Political Satire</button>
-</div>
-
-<!-- BOOKS GRID -->
 <div class="books-grid" id="booksGrid"></div>
 
-<!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item">
     <span class="stat-number">6</span>
     <div class="stat-label">Books Catalogued</div>
   </div>
   <div class="stat-item">
-    <span class="stat-number">1865–1898</span>
+    <span class="stat-number">1865-1898</span>
     <div class="stat-label">Historical Period</div>
   </div>
   <div class="stat-item">
@@ -702,27 +537,6 @@
   </div>
 </div>
 
-<!-- SOURCES -->
-<div class="sources-section">
-  <button class="sources-toggle" onclick="toggleSources(this)">
-    <span>📚 Works Cited (MLA Format)</span>
-    <span>▼</span>
-  </button>
-  <div class="sources-panel" id="sourcesPanel">
-    <ol>
-      <li>Bellamy, Edward. <em>Looking Backward: 2000–1887.</em> Ticknor and Company, 1888. Available at <a href="https://www.gutenberg.org/ebooks/624" target="_blank">Project Gutenberg</a>.</li>
-      <li>Carnegie, Andrew. "The Gospel of Wealth." <em>North American Review,</em> vol. 148, no. 391, June 1889, pp. 653–664. Available at <a href="https://www.americanyawp.com/reader/16-capital-and-labor/andrew-carnegies-gospel-of-wealth-june-1889/" target="_blank">The American Yawp Reader</a>.</li>
-      <li>Fiveable. "Gospel of Wealth Definition – AP US History Key Term." <em>Fiveable,</em> 2024, <a href="https://fiveable.me/key-terms/apush/gospel-of-wealth" target="_blank">fiveable.me</a>.</li>
-      <li>Jackson, Helen Hunt. <em>A Century of Dishonor: A Sketch of the United States Government's Dealings with Some of the Indian Tribes.</em> Harper &amp; Brothers, 1881. Available at <a href="https://www.gutenberg.org/ebooks/13698" target="_blank">Project Gutenberg</a>.</li>
-      <li>Keppler, Joseph. "Bosses of the Senate." <em>Puck Magazine,</em> 23 Jan. 1889. Library of Congress Prints and Photographs Division. <a href="https://www.loc.gov/pictures/item/2012647439/" target="_blank">loc.gov</a>.</li>
-      <li>Riis, Jacob. <em>How the Other Half Lives: Studies among the Tenements of New York.</em> Charles Scribner's Sons, 1890. Available at <a href="https://www.gutenberg.org/ebooks/45502" target="_blank">Project Gutenberg</a>.</li>
-      <li>Theodore Roosevelt Center. "How the Other Half Lives." <em>Theodore Roosevelt Center Encyclopedia,</em> Dickinson State University, 2024, <a href="https://www.theodorerooseveltcenter.org/encyclopedia/culture-and-society/how-the-other-half-lives/" target="_blank">theodorerooseveltcenter.org</a>.</li>
-      <li>Turner, Frederick Jackson. "The Significance of the Frontier in American History." <em>Annual Report of the American Historical Association,</em> 1893, pp. 197–227. Available at <a href="https://www.gutenberg.org/ebooks/22994" target="_blank">Project Gutenberg</a>.</li>
-    </ol>
-  </div>
-</div>
-
-<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" id="modal">
     <button class="modal-close" onclick="closeModalBtn()">✕</button>
@@ -734,7 +548,7 @@
 </div>
 
 <footer>
-  <p>GildedReads &bull; <strong>APUSH Period 6</strong> &bull; Great Neck North High School &bull; Historical reviews are fictional, written in the voice of Gilded Age figures for educational purposes.</p>
+  <p>GildedReads &bull; <strong>Great Neck North High School</strong> &bull; Historical reviews are fictional, written in the voice of Gilded Age figures for educational purposes.</p>
 </footer>
 
 <script>
@@ -745,14 +559,15 @@ const books = [
     author: "Jacob Riis",
     year: 1890,
     genre: "Muckraking",
-    color: "linear-gradient(135deg, #3d2b1f 0%, #7a4a2e 100%)",
+    // TO CHANGE IMAGE: Replace the URL below with your own image link
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/How_the_Other_Half_Lives_frontispiece.jpg/440px-How_the_Other_Half_Lives_frontispiece.jpg",
     rating: 4.5,
-    significance: "Sparked urban reform & muckraking journalism",
+    significance: "Sparked urban reform and muckraking journalism",
     desc: "A pioneering work of photojournalism exposing the brutal living conditions in New York City's immigrant tenements. Riis used flash photography to drag the slums into the public eye, forcing middle-class readers to reckon with poverty they had ignored.",
     apushImport: "One of the earliest examples of muckraking journalism; directly influenced Theodore Roosevelt's housing reforms and the New York Tenement House Act of 1901. Key to understanding Gilded Age inequality and the roots of the Progressive Era.",
-    authorBio: "Jacob Riis (1849–1914) emigrated from Denmark to New York in 1870, where he experienced poverty firsthand before becoming a police reporter for the New York Sun. A devout Christian, he combined journalism with a moral mission, pioneering flash photography to document slum conditions. His friendship with Theodore Roosevelt gave his work direct political impact.",
+    authorBio: "Jacob Riis (1849-1914) emigrated from Denmark to New York in 1870, where he experienced poverty firsthand before becoming a police reporter for the New York Sun. A devout Christian, he combined journalism with a moral mission, pioneering flash photography to document slum conditions. His friendship with Theodore Roosevelt gave his work direct political impact.",
     reviews: [
-      { name: "Theodore Roosevelt", role: "NYC Police Commissioner, 1895", stars: 5, text: "I have read your book and I have come to help. Riis's work is not comfortable reading — it is not meant to be. Every reformer in this city should be required to sit with it." },
+      { name: "Theodore Roosevelt", role: "NYC Police Commissioner, 1895", stars: 5, text: "I have read your book and I have come to help. Riis's work is not comfortable reading. It is not meant to be. Every reformer in this city should be required to sit with it." },
       { name: "A Tenement Landlord", role: "Lower East Side, NYC", stars: 1, text: "Sensationalist drivel. My tenants have roofs over their heads and work to do. What more does this Danish meddler want? This book will only stir up trouble where there is none." },
       { name: "A Settlement House Worker", role: "Henry Street, NYC, 1892", stars: 5, text: "Finally, someone has said plainly what we see every day. Riis has given a face and a name to suffering that this city's comfortable classes have been perfectly happy to ignore." }
     ]
@@ -763,17 +578,18 @@ const books = [
     author: "Andrew Carnegie",
     year: 1889,
     genre: "Political Economy",
-    color: "linear-gradient(135deg, #1a2a1a 0%, #2d4a3e 60%, #8a6a1f 100%)",
+    // TO CHANGE IMAGE: Replace the URL below with your own image link
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Andrew_Carnegie%2C_three-quarter_length_portrait%2C_seated%2C_facing_slightly_left%2C_1913.jpg/440px-Andrew_Carnegie%2C_three-quarter_length_portrait%2C_seated%2C_facing_slightly_left%2C_1913.jpg",
     rating: 3.0,
-    significance: "Defined elite philanthropy & justified industrial wealth",
-    desc: "Carnegie's sweeping essay argues that immense wealth is not a sin but a responsibility. The rich, he contends, are stewards of civilization — obligated to spend their fortunes wisely on public institutions rather than leave it to idle heirs or the chaos of redistribution.",
-    apushImport: "A foundational text of Gilded Age ideology. Carnegie's philosophy both challenged Social Darwinism and reinforced wealth inequality by insisting the rich — not workers or the government — should decide how wealth is used. Critical for understanding the tension between capitalism and reform.",
-    authorBio: "Andrew Carnegie (1835–1919) immigrated from Scotland as a child and rose from telegraph messenger to become the wealthiest man in America through the steel industry. He later gave away over $350 million (roughly $5 billion today), funding 2,500 libraries worldwide. His story became the defining Gilded Age rags-to-riches narrative.",
+    significance: "Defined elite philanthropy and justified industrial wealth",
+    desc: "Carnegie's sweeping essay argues that immense wealth is not a sin but a responsibility. The rich, he contends, are stewards of civilization, obligated to spend their fortunes wisely on public institutions rather than leave it to idle heirs or the chaos of redistribution.",
+    apushImport: "A foundational text of Gilded Age ideology. Carnegie's philosophy both challenged Social Darwinism and reinforced wealth inequality by insisting the rich, not workers or the government, should decide how wealth is used. Critical for understanding the tension between capitalism and reform.",
+    authorBio: "Andrew Carnegie (1835-1919) immigrated from Scotland as a child and rose from telegraph messenger to become the wealthiest man in America through the steel industry. He later gave away over $350 million (roughly $5 billion today), funding 2,500 libraries worldwide. His story became the defining Gilded Age rags-to-riches narrative.",
     reviews: [
       { name: "John D. Rockefeller", role: "Standard Oil magnate", stars: 4, text: "Carnegie and I differ on methods, but his central point is sound. Wealth accumulated honestly ought to be returned to society. Though I confess I find his tone rather self-congratulatory." },
       { name: "Samuel Gompers", role: "President, American Federation of Labor", stars: 1, text: "He builds libraries with the wages he refused to pay his workers. Carnegie could have started with an eight-hour workday before writing philosophy about the duties of the rich." },
       { name: "A Steel Worker, Homestead PA", role: "Carnegie Steel Plant, 1892", stars: 1, text: "Gospel of Wealth? He locked us out and brought Pinkerton men with rifles. Let him keep his libraries. I want the wages he owes me." },
-      { name: "Jane Addams", role: "Hull House, Chicago", stars: 3, text: "The impulse toward philanthropy is admirable. But Carnegie's framework asks nothing of the system that produces poverty — only of the wealthy men it enriches. That is a comfortable kind of reform." }
+      { name: "Jane Addams", role: "Hull House, Chicago", stars: 3, text: "The impulse toward philanthropy is admirable. But Carnegie's framework asks nothing of the system that produces poverty, only of the wealthy men it enriches. That is a comfortable kind of reform." }
     ]
   },
   {
@@ -782,15 +598,16 @@ const books = [
     author: "Frederick Jackson Turner",
     year: 1893,
     genre: "Frontier History",
-    color: "linear-gradient(135deg, #4a2800 0%, #8b5e3c 60%, #c9873a 100%)",
+    // TO CHANGE IMAGE: Replace the URL below with your own image link
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/AmericanProgressbyJohnGast.jpg/640px-AmericanProgressbyJohnGast.jpg",
     rating: 3.5,
-    significance: "Redefined American identity & sparked expansionism debate",
-    desc: "Delivered at the 1893 Chicago World's Fair, Turner's landmark essay argues that the American frontier — now officially 'closed' per the 1890 census — was the engine of American democracy, individualism, and national character. Its closing, he warns, ends an era.",
+    significance: "Redefined American identity and sparked the expansionism debate",
+    desc: "Delivered at the 1893 Chicago World's Fair, Turner's landmark essay argues that the American frontier, now officially closed per the 1890 census, was the engine of American democracy, individualism, and national character. Its closing, he warns, ends an era.",
     apushImport: "The Frontier Thesis shaped American historical thinking for decades and provided intellectual justification for overseas imperialism. If the frontier forged American identity, its closing raised the question: where does America expand next? Directly connected to the Spanish-American War and the debate over empire.",
-    authorBio: "Frederick Jackson Turner (1861–1932) was a University of Wisconsin historian whose 1893 paper became one of the most influential — and debated — essays in American history. He argued that the frontier experience explained American exceptionalism: its democracy, its individualism, its restlessness. Later scholars challenged his thesis for erasing Native American experience entirely.",
+    authorBio: "Frederick Jackson Turner (1861-1932) was a University of Wisconsin historian whose 1893 paper became one of the most influential and debated essays in American history. He argued that the frontier experience explained American exceptionalism: its democracy, its individualism, its restlessness. Later scholars challenged his thesis for erasing Native American experience entirely.",
     reviews: [
-      { name: "Theodore Roosevelt", role: "Author & future President", stars: 5, text: "Turner has put into words what many of us have felt but could not articulate. The frontier made us Americans. The question his essay leaves burning is: what do we do now that it is gone?" },
-      { name: "Sitting Bull", role: "Hunkpapa Lakota leader", stars: 1, text: "He speaks of 'free land' and 'wilderness' as if no one lived there. My people were on that land. The frontier that forged his democracy was the border of our destruction." },
+      { name: "Theodore Roosevelt", role: "Author and future President", stars: 5, text: "Turner has put into words what many of us have felt but could not articulate. The frontier made us Americans. The question his essay leaves burning is: what do we do now that it is gone?" },
+      { name: "Sitting Bull", role: "Hunkpapa Lakota leader", stars: 1, text: "He speaks of free land and wilderness as if no one lived there. My people were on that land. The frontier that forged his democracy was the border of our destruction." },
       { name: "A Historian, 1893", role: "American Historical Association", stars: 4, text: "Turner's argument is sweeping, perhaps too sweeping, but it is impossible to ignore. He has reframed the entire question of what made this country what it is. Whether he is right is another matter." }
     ]
   },
@@ -800,12 +617,13 @@ const books = [
     author: "Helen Hunt Jackson",
     year: 1881,
     genre: "Social Reform",
-    color: "linear-gradient(135deg, #2a0a0a 0%, #8b2635 60%, #c04a1a 100%)",
+    // TO CHANGE IMAGE: Replace the URL below with your own image link
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/A_century_of_dishonor_-_a_sketch_of_the_United_States_government%27s_dealings_with_some_of_the_Indian_tribes_%281881%29_%2814596179820%29.jpg/440px-A_century_of_dishonor_-_a_sketch_of_the_United_States_government%27s_dealings_with_some_of_the_Indian_tribes_%281881%29_%2814596179820%29.jpg",
     rating: 4.0,
     significance: "Exposed U.S. betrayal of Native Americans; inspired the Dawes Act",
     desc: "A meticulously documented indictment of the U.S. government's century of broken treaties, forced removal, and betrayal of Native American nations. Jackson sent a copy to every member of Congress. She wanted shame to do what law had not.",
-    apushImport: "Jackson's book directly prompted national debate on Native American policy and contributed to the passage of the Dawes Act (1887) — though ironically, the Dawes Act ultimately caused more land loss for Native peoples. Illustrates the complex and often destructive relationship between reform movements and the communities they claimed to help.",
-    authorBio: "Helen Hunt Jackson (1830–1885) was a Massachusetts poet and novelist who became a passionate advocate for Native American rights after attending a lecture by Ponca Chief Standing Bear in 1879. She lobbied Congress, filed reports, and wrote both A Century of Dishonor and the novel Ramona to expose U.S. Indian policy. She died before seeing the Dawes Act passed.",
+    apushImport: "Jackson's book directly prompted national debate on Native American policy and contributed to the passage of the Dawes Act (1887), though ironically, the Dawes Act ultimately caused more land loss for Native peoples. Illustrates the complex and often destructive relationship between reform movements and the communities they claimed to help.",
+    authorBio: "Helen Hunt Jackson (1830-1885) was a Massachusetts poet and novelist who became a passionate advocate for Native American rights after attending a lecture by Ponca Chief Standing Bear in 1879. She lobbied Congress, filed reports, and wrote both A Century of Dishonor and the novel Ramona to expose U.S. Indian policy. She died before seeing the Dawes Act passed.",
     reviews: [
       { name: "Chief Standing Bear", role: "Ponca Nation leader", stars: 5, text: "She listened. She wrote what she heard. Most Americans do not want to know what their government has done in their name. Jackson made it harder to look away." },
       { name: "A U.S. Senator", role: "Senate Indian Affairs Committee, 1881", stars: 2, text: "Mrs. Jackson is a novelist, not a lawyer. Her account is emotional and one-sided. The government has always acted in good faith toward the Indian, given the circumstances." },
@@ -818,33 +636,35 @@ const books = [
     author: "Joseph Keppler",
     year: 1889,
     genre: "Political Satire",
-    color: "linear-gradient(135deg, #1a1a2e 0%, #2c2c6b 60%, #4a3a8a 100%)",
+    // TO CHANGE IMAGE: Replace the URL below with your own image link
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Bosses_of_the_Senate_by_Joseph_Keppler.jpg/640px-Bosses_of_the_Senate_by_Joseph_Keppler.jpg",
     rating: 4.5,
     significance: "Iconic image of corporate capture of American democracy",
-    desc: "Not a book but an image that struck harder than any essay: Keppler's Puck magazine cartoon shows massive, bloated trust monopolies looming over tiny senators, who sit below them as mere puppets. The gallery for the people is locked. The message was unmistakable.",
+    desc: "Not a book but an image that struck harder than any essay. Keppler's Puck magazine cartoon shows massive, bloated trust monopolies looming over tiny senators, who sit below them as mere puppets. The gallery for the people is locked. The message was unmistakable.",
     apushImport: "Keppler's cartoon is one of the most important primary sources for understanding Gilded Age politics and the relationship between big business and government. It visually captures the critique that Populists, reformers, and later Progressives made about corporate capture of democracy. Directly connects to antitrust debates and the push for the Sherman Antitrust Act (1890).",
-    authorBio: "Joseph Keppler (1838–1894) was an Austrian immigrant and the founder of Puck, America's first successful humor magazine. His political cartoons reached hundreds of thousands of readers weekly and shaped public opinion during the Gilded Age. He was particularly devastating in his attacks on monopolies, Tammany Hall corruption, and the influence of money in politics.",
+    authorBio: "Joseph Keppler (1838-1894) was an Austrian immigrant and the founder of Puck, America's first successful humor magazine. His political cartoons reached hundreds of thousands of readers weekly and shaped public opinion during the Gilded Age. He was particularly devastating in his attacks on monopolies, Tammany Hall corruption, and the influence of money in politics.",
     reviews: [
       { name: "A Populist Farmer, Kansas", role: "Member, Farmers' Alliance, 1890", stars: 5, text: "Keppler drew what we already knew. Those fat trusts own the Senate same as they own the railroads. At least someone in New York had the nerve to print it." },
-      { name: "Jay Gould", role: "Railroad magnate & financier", stars: 1, text: "Inflammatory nonsense from a foreign cartoonist with a grudge. I have never set foot in the Senate chamber. My lawyers handle those relationships." },
+      { name: "Jay Gould", role: "Railroad magnate and financier", stars: 1, text: "Inflammatory nonsense from a foreign cartoonist with a grudge. I have never set foot in the Senate chamber. My lawyers handle those relationships." },
       { name: "A Progressive-Era Journalist", role: "McClure's Magazine, 1902", stars: 5, text: "Keppler drew in 1889 what we are still writing about today. This cartoon did more to explain Gilded Age politics in a single image than a dozen academic essays." }
     ]
   },
   {
     id: 6,
-    title: "Looking Backward: 2000–1887",
+    title: "Looking Backward: 2000-1887",
     author: "Edward Bellamy",
     year: 1888,
     genre: "Utopian Fiction",
-    color: "linear-gradient(135deg, #0a2a2a 0%, #1a5a5a 60%, #2d8a7a 100%)",
+    // TO CHANGE IMAGE: Replace the URL below with your own image link
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Looking_Backward_cover.jpg/440px-Looking_Backward_cover.jpg",
     rating: 3.5,
     significance: "Best-selling critique of capitalism; inspired Nationalist Clubs",
     desc: "Julian West falls asleep in 1887 Boston and wakes in the year 2000, where inequality has been abolished, industry is nationalized, and workers are citizens of a cooperative commonwealth. The novel sold over a million copies and launched a political movement.",
-    apushImport: "Looking Backward was one of the most widely-read novels of the 19th century and directly inspired the formation of Nationalist Clubs across the country — early predecessors to the Progressive movement. It expressed the anxiety many Americans felt about Gilded Age inequality and offered a coherent alternative, influencing figures from labor organizers to suffragists.",
-    authorBio: "Edward Bellamy (1850–1898) was a Massachusetts journalist and novelist who wrote Looking Backward in 18 months. He expected a modest readership; instead, the book became a cultural phenomenon, selling over a million copies by 1900. Bellamy Nationalist Clubs, inspired by the novel, sprang up across the country. He died of tuberculosis at 48, before seeing the Progressive Era his book helped inspire.",
+    apushImport: "Looking Backward was one of the most widely-read novels of the 19th century and directly inspired the formation of Nationalist Clubs across the country, early predecessors to the Progressive movement. It expressed the anxiety many Americans felt about Gilded Age inequality and offered a coherent alternative, influencing figures from labor organizers to suffragists.",
+    authorBio: "Edward Bellamy (1850-1898) was a Massachusetts journalist and novelist who wrote Looking Backward in 18 months. He expected a modest readership; instead, the book became a cultural phenomenon, selling over a million copies by 1900. Bellamy Nationalist Clubs, inspired by the novel, sprang up across the country. He died of tuberculosis at 48, before seeing the Progressive Era his book helped inspire.",
     reviews: [
-      { name: "Eugene V. Debs", role: "Labor organizer & Socialist", stars: 5, text: "Bellamy showed that another world is possible — not through fantasy, but through logic. If industry can be organized for war, it can be organized for human need. This book planted the seed in a generation of workers." },
-      { name: "Andrew Carnegie", role: "Steel magnate & philanthropist", stars: 2, text: "An entertaining enough dream, but a dangerous one. Bellamy's world has no room for individual achievement, no incentive for the genius that drives progress. Utopia is the enemy of excellence." },
+      { name: "Eugene V. Debs", role: "Labor organizer and Socialist", stars: 5, text: "Bellamy showed that another world is possible, not through fantasy, but through logic. If industry can be organized for war, it can be organized for human need. This book planted the seed in a generation of workers." },
+      { name: "Andrew Carnegie", role: "Steel magnate and philanthropist", stars: 2, text: "An entertaining enough dream, but a dangerous one. Bellamy's world has no room for individual achievement, no incentive for the genius that drives progress. Utopia is the enemy of excellence." },
       { name: "A Suffragist, National American Woman Suffrage Association", role: "1892", stars: 4, text: "Bellamy's year 2000 includes women as full economic participants. After years of being told we are unsuited for public life, reading a future where that argument has simply been discarded was quietly radical." }
     ]
   }
@@ -866,9 +686,8 @@ function renderCards(booksToRender) {
   booksToRender.forEach(book => {
     const card = document.createElement('div');
     card.className = 'book-card';
-    card.dataset.genre = book.genre;
     card.innerHTML = `
-      <div class="book-cover" style="background: ${book.color}">
+      <div class="book-cover" style="background-image: url('${book.image}'); background-color: #2d4a3e;">
         <span class="genre-tag">${book.genre}</span>
         <div class="book-cover-title">${book.title}</div>
       </div>
@@ -928,22 +747,10 @@ function toggleBio(btn, bookId) {
   btn.classList.toggle('open', isOpen);
 }
 
-function filterBooks(genre, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const filtered = genre === 'all' ? books : books.filter(b => b.genre === genre);
-  renderCards(filtered);
-}
-
-function toggleSources(btn) {
-  const panel = document.getElementById('sourcesPanel');
-  panel.classList.toggle('open');
-  btn.querySelector('span:last-child').textContent = panel.classList.contains('open') ? '▲' : '▼';
-}
-
 function openModal(bookId) {
   const book = books.find(b => b.id === bookId);
-  document.getElementById('modalCover').style.background = book.color;
+  document.getElementById('modalCover').style.backgroundImage = `url('${book.image}')`;
+  document.getElementById('modalCover').style.backgroundColor = '#2d4a3e';
   document.getElementById('modalTitle').textContent = book.title;
   document.getElementById('modalBody').innerHTML = `
     <div>
@@ -960,7 +767,7 @@ function openModal(bookId) {
       <p style="font-family:'Lora',serif;font-size:0.88rem;line-height:1.7;color:#4a3728">${book.desc}</p>
     </div>
     <div>
-      <div class="modal-section-title">APUSH Significance</div>
+      <div class="modal-section-title">Historical Significance</div>
       <p style="font-family:'Lora',serif;font-size:0.88rem;line-height:1.7;color:#4a3728">${book.apushImport}</p>
     </div>
     <div>
