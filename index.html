@@ -111,8 +111,7 @@
     }
 
     .book-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 32px var(--shadow);
+      box-shadow: 0 4px 24px var(--shadow);
     }
 
     /*
@@ -340,45 +339,7 @@
       flex-wrap: wrap;
     }
 
-    .stats-bar {
-      background: var(--green);
-      color: var(--cream);
-      padding: 1.5rem 2rem;
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
 
-    .stat-item { text-align: center; }
-
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--gold);
-      display: block;
-    }
-
-    .stat-label {
-      font-size: 0.72rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      opacity: 0.7;
-      margin-top: 0.15rem;
-    }
-
-    footer {
-      background: var(--brown);
-      color: rgba(250,246,238,0.5);
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.8rem;
-      font-family: 'Lora', serif;
-      font-style: italic;
-    }
-
-    footer strong { color: var(--gold); font-style: normal; }
 
     .modal-overlay {
       display: none;
@@ -514,28 +475,12 @@
 <div class="hero">
   <h1>Books That Shaped <em>Gilded America</em></h1>
   <p>Historical reviews from the people who lived through it</p>
+  <p style="margin-top:0.5rem;color:rgba(250,246,238,0.5);font-size:0.8rem;font-family:'DM Sans',sans-serif;font-style:normal;letter-spacing:2px;text-transform:uppercase;position:relative;">1865 – 1898</p>
 </div>
 
 <div class="books-grid" id="booksGrid"></div>
 
-<div class="stats-bar">
-  <div class="stat-item">
-    <span class="stat-number">6</span>
-    <div class="stat-label">Books Catalogued</div>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">1865-1898</span>
-    <div class="stat-label">Historical Period</div>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">18</span>
-    <div class="stat-label">Historical Reviews</div>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">3★</span>
-    <div class="stat-label">Avg. Rating</div>
-  </div>
-</div>
+
 
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" id="modal">
@@ -547,9 +492,7 @@
   </div>
 </div>
 
-<footer>
-  <p>GildedReads &bull; <strong>Great Neck North High School</strong> &bull; Historical reviews are fictional, written in the voice of Gilded Age figures for educational purposes.</p>
-</footer>
+
 
 <script>
 const books = [
