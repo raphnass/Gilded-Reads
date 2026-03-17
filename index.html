@@ -104,7 +104,7 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 2px 16px var(--shadow);
-      transition: transform 0.25s, box-shadow 0.25s;
+      transition: box-shadow 0.25s;
       display: flex;
       flex-direction: column;
       border: 1px solid rgba(201,168,76,0.15);
@@ -114,13 +114,6 @@
       box-shadow: 0 4px 24px var(--shadow);
     }
 
-    /*
-      HOW TO ADD YOUR OWN IMAGES:
-      In the books array below, find the book you want to update.
-      Replace the URL in the "image" field with a direct link to your image.
-      Example: image: "https://yoursite.com/your-image.jpg"
-      The image will fill the cover area and the title sits on top of it.
-    */
     .book-cover {
       height: 160px;
       display: flex;
@@ -339,8 +332,6 @@
       flex-wrap: wrap;
     }
 
-
-
     .modal-overlay {
       display: none;
       position: fixed;
@@ -462,7 +453,6 @@
 
     @media (max-width: 600px) {
       .books-grid { grid-template-columns: 1fr; padding: 1.5rem 1rem; }
-      .stats-bar { gap: 1.25rem; }
     }
   </style>
 </head>
@@ -480,8 +470,6 @@
 
 <div class="books-grid" id="booksGrid"></div>
 
-
-
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" id="modal">
     <button class="modal-close" onclick="closeModalBtn()">✕</button>
@@ -491,8 +479,6 @@
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
-
-
 
 <script>
 const books = [
@@ -645,7 +631,7 @@ function renderCards(booksToRender) {
           </div>
         </div>
         <p class="book-desc">${book.desc}</p>
-        <div><span class="significance-pill">📌 ${book.significance}</span></div>
+        <div><span class="significance-pill">${book.significance}</span></div>
         <div class="card-actions">
           <button class="reviews-toggle" onclick="toggleReviews(this, ${book.id})">
             Historical Reviews (${book.reviews.length}) <span class="arrow">▼</span>
@@ -700,7 +686,7 @@ function openModal(bookId) {
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem">
         <div>
           <div style="font-family:'Lora',serif;font-style:italic;color:var(--brown-mid)">${book.author}, ${book.year}</div>
-          <span class="significance-pill" style="margin-top:0.35rem;display:inline-block">📌 ${book.significance}</span>
+          <span class="significance-pill" style="margin-top:0.35rem;display:inline-block">${book.significance}</span>
         </div>
         <div class="stars" style="font-size:1.1rem">${renderStars(book.rating)} <span class="avg-rating" style="font-size:0.9rem">${book.rating}/5</span></div>
       </div>
